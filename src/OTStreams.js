@@ -5,6 +5,7 @@ import OTSubscriberContext from './OTSubscriberContext';
 export default function OTStreams(props, context) {
   const session = props.session || context.session || null;
   const streams = props.streams || context.streams || null;
+  const className = props.className || context.className;
 
   if (!session) {
     return <div />;
@@ -20,21 +21,24 @@ export default function OTStreams(props, context) {
       : child))
     : null;
 
-  return <div>{childrenWithContextWrapper}</div>;
+  return <div className={className}>{childrenWithContextWrapper}</div>;
 }
 
 OTStreams.propTypes = {
   children: PropTypes.element.isRequired,
   session: PropTypes.shape({ publish: PropTypes.func, subscribe: PropTypes.func }),
   streams: PropTypes.arrayOf(PropTypes.object),
+  className: PropTypes.string,
 };
 
 OTStreams.defaultProps = {
   session: null,
   streams: null,
+  className: '',
 };
 
 OTStreams.contextTypes = {
   session: PropTypes.shape({ publish: PropTypes.func, subscribe: PropTypes.func }),
   streams: PropTypes.arrayOf(PropTypes.object),
+  className: PropTypes.string,
 };

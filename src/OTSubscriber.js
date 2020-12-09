@@ -130,8 +130,8 @@ export default class OTSubscriber extends Component {
   }
 
   render() {
-    const { className, style } = this.props;
-    return <div className={className} style={style} ref={(node) => { this.node = node; }} />;
+    const { className, style, pushSubscriber = () => {} } = this.props;
+    return <div className={className} style={style} ref={(node) => { pushSubscriber(node); this.node = node; }} />;
   }
 }
 
@@ -151,6 +151,7 @@ OTSubscriber.propTypes = {
   retryAttemptTimeout: PropTypes.number,
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onSubscribe: PropTypes.func,
+  pushSubscriber: PropTypes.func,
   onError: PropTypes.func,
 };
 
@@ -166,6 +167,7 @@ OTSubscriber.defaultProps = {
   eventHandlers: null,
   onSubscribe: null,
   onError: null,
+  pushSubscriber: null,
 };
 
 OTSubscriber.contextTypes = {

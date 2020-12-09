@@ -71,7 +71,9 @@ export default class OTSession extends Component {
   }
 
   render() {
-    return <div>{this.props.children}</div>;
+    const { className } = this.props;
+
+    return <div className={className}>{this.props.children}</div>;
   }
 }
 
@@ -86,6 +88,7 @@ OTSession.propTypes = {
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onConnect: PropTypes.func,
   onError: PropTypes.func,
+  className: PropTypes.string,
   options: PropTypes.object,
 };
 
@@ -93,6 +96,7 @@ OTSession.defaultProps = {
   eventHandlers: null,
   onConnect: null,
   onError: null,
+  className: '',
   options: {},
 };
 
